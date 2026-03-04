@@ -31,7 +31,7 @@ except ValueError:
     row_count = 5
 
 # 5. Construct the file path and read the data
-file_path = f"Dataframes/{selected_city}.csv"
+file_path = f"archive/Dataframes/{selected_city}.csv"
 
 # 6. Check if the file actually exists before trying to open it
 if os.path.exists(file_path):
@@ -40,4 +40,3 @@ if os.path.exists(file_path):
     print(df.head(row_count))
 else:
     print(f"\nError: Could not find the file at {file_path}.")
-    print("Make sure you downloaded the CSV for this city and placed it inside a folder named 'Dataframes'!")
