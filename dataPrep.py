@@ -21,6 +21,8 @@ def split_data(folder_path):
                                                                           [constants.TEST_SPLIT,
                                                                            constants.TRAIN_SPLIT,
                                                                            constants.VALIDATION_SPLIT])
+    #shuffled_df = df.sample(frac=1, random_state=42).reset_index(drop=True)
+    
     
 
     
