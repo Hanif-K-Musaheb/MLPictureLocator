@@ -46,3 +46,4 @@ def split_data(folder_path, seed=42):
     test_files  = files[n_train + n_val:n_train + n_val + n_test]
 
     return train_files, val_files, test_files
+
