@@ -1,4 +1,3 @@
-import torch
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import constants as c
@@ -7,7 +6,10 @@ def get_data_loaders(batch_size=c.BATCH_SIZE):
     #  transformations (the rules for altering your images)
     image_prep = transforms.Compose([
         transforms.Resize((224, 224)), # Safety check for size
-        transforms.ToTensor()          # Converts to a tensor (a multi-dimensional grid of numbers) and normalizes to decimals
+        transforms.ToTensor(),        # Converts to a tensor (a multi-dimensional grid of numbers) and normalizes to decimals
+
+        #This shifts the Red, Green, and Blue colors to perfectly match ResNet's exact expectations
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
     #Load the datasets (your overall collection of organized data) from the folders

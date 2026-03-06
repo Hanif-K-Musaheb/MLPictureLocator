@@ -1,4 +1,9 @@
+'''constants file'''
+
 import os
+
+#Data facts
+NUM_CITIES = 23
 
 #Data Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -19,3 +24,7 @@ TRAIN_SPLIT=.80
 
 ##Data Loader
 BATCH_SIZE=32
+
+##Trainer
+LEARNING_RATE = 0.001
+EPOCHS = 5 #how many epochs needed for training
