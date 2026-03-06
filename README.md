@@ -3,16 +3,11 @@
 #### [GSV database](https://www.kaggle.com/datasets/amaralibey/gsv-cities)
 ------
 
-### What we need to do:
-1. **Data Prep**:
-- [x] find a way to get the city out of the image name
-- [x] create a function to split the data of every city into a 10% test, 10% validation, 80% training
-- [x] data loader
-- [x] resize images
-2. **Building the Architecture**:
-- [ ] get the CNN to image classify
-3. **The Training Loop**
-- [ ]  Forward Pass: The computer takes an image, passes it through the network, and makes a guess (e.g., "I am 80% sure this is Chicago")
-- [ ]  Calculate Loss: The computer checks the actual folder name. If it was actually Boston, a loss function (a mathematical formula that calculates exactly how wrong the computer's guess was) generates an error score.
-- [ ]  Backpropagation: The computer works backward through its math, adjusting its internal weights (the numbers inside the network that determine how important certain features are) to make sure it guesses closer to "Boston" next time.
-- [ ] repeat
+### to start training data:
+>do once
+ 1. run image resize
+ 2. run make splits
+ 3. run data pipe
+ 4. run model to install resnet
+> need to add save function but should only be done once unless there are changes made to the train
+ 6. run train 
