@@ -44,8 +44,4 @@ for city_name in os.listdir(input_folder):
                 except Exception as e:
                     print(f"Failed to process {file_name}: {e}")
 
-<<<<<<< HEAD
 print("\nAll images have been successfully resized to 224x224!")
-=======
-print("\nAll images have been successfully resized to 224x224!")
->>>>>>> 7ba535a5911c5c037f372ad988ce80ad4174b802
