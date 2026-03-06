@@ -1,4 +1,6 @@
 import os
+#Data facts
+NUM_CITIES = 23
 
 #Data Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
