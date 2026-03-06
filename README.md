@@ -5,8 +5,10 @@
 
 ### What we need to do:
 1. **Data Prep**:
-- [ ] find a way to get the city out of the image name
-- [ ] create a function to split the data of every city into a 10% test, 10% validation, 80% training
+- [x] find a way to get the city out of the image name
+- [x] create a function to split the data of every city into a 10% test, 10% validation, 80% training
+- [x] data loader
+- [x] resize images
 2. **Building the Architecture**:
 - [ ] get the CNN to image classify
 3. **The Training Loop**
