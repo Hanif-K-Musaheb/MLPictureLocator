@@ -7,6 +7,7 @@ from dataPipe import get_data_loaders
 from model import CityGuesserTransfer
 
 import constants as c
+import math
 
 def train_model():
     # 1. Setup the Hardware
@@ -68,7 +69,7 @@ def train_model():
 
             # Print an update every 100 batches so you don't stare at a blank screen!
             if batch_idx % 100 == 0:
-                print(f"Epoch [{epoch+1}/{epochs}] | Batch [{batch_idx}/{len(train_loader)}] | Loss: {loss.item():.4f}")
+                print(f"Epoch [{epoch+1}/{epochs}] | Batch [{batch_idx}/{len(train_loader)}] | Loss: {loss.item():.4f} | Accuracy: {math.e**-(loss.item()):.2f}")
 
         # Print the average error score at the end of the entire Epoch
         avg_loss = running_loss / len(train_loader)

@@ -28,3 +28,4 @@ BATCH_SIZE=32
 ##Trainer
 LEARNING_RATE = 0.001
 EPOCHS = 5 #how many epochs needed for training
+COOLING_TIME=0.15
