@@ -8,6 +8,7 @@ from model import CityGuesserTransfer
 
 import constants as c
 import math
+import time
 
 def train_model():
     # 1. Setup the Hardware
@@ -35,7 +36,7 @@ def train_model():
     # 5. The Main Training Loop
     epochs = c.EPOCHS #5# An epoch is one complete pass through your entire collection of training pictures
     
-
+    best_val_accuracy = 0
     ### TRAINING PHASE
     print("Starting training!")
     for epoch in range(epochs):
@@ -64,12 +65,15 @@ def train_model():
             # Step E: Apply the fixes
             optimizer.step()
 
+            #optional line to rest my CPU i have a macbook air so no fan :(
+            time.sleep(c.COOLING_TIME)
+
             # Add up the error score so we can print it later
             running_loss += loss.item()
 
             # Print an update every 100 batches so you don't stare at a blank screen!
             if batch_idx % 100 == 0:
-                print(f"Epoch [{epoch+1}/{epochs}] | Batch [{batch_idx}/{len(train_loader)}] | Loss: {loss.item():.4f} | Accuracy: {math.e**-(loss.item()):.2f}")
+                print(f"Epoch [{epoch+1}/{epochs}] | Batch [{batch_idx}/{len(train_loader)}] | Loss: {loss.item():.4f} | Accuracy: {(math.e**-(loss.item()))*100:.1f}%")
 
         # Print the average error score at the end of the entire Epoch
         avg_loss = running_loss / len(train_loader)
