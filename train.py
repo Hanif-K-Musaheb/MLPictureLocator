@@ -34,6 +34,8 @@ def train_model():
     # 5. The Main Training Loop
     epochs = c.EPOCHS #5# An epoch is one complete pass through your entire collection of training pictures
     
+
+    ### TRAINING PHASE
     print("Starting training!")
     for epoch in range(epochs):
         model.train() # Tells the model it is in learning mode (turns on Dropout)
@@ -70,7 +72,47 @@ def train_model():
 
         # Print the average error score at the end of the entire Epoch
         avg_loss = running_loss / len(train_loader)
-        print(f"--- End of Epoch {epoch+1} | Average Loss: {avg_loss:.4f} ---")
+
+        ### VALIDATION PHASE    
+        model.eval() # Turns OFF learning mode (locks the dials so it can't cheat on the test)
+        val_loss = 0.0
+        correct_guesses = 0
+        total_images = 0
+
+        # torch.no_grad() tells PyTorch to completely turn off the calculus engine to save memory
+        with torch.no_grad(): 
+            for images, labels in val_loader:
+                images, labels = images.to(device), labels.to(device)
+                
+                # Make guesses on the pop quiz
+                predictions = model(images)
+                
+                # Grade the pop quiz
+                loss = criterion(predictions, labels)
+                val_loss += loss.item()
+                
+                # Calculate the actual percentage of correct answers
+                # torch.max finds the highest score out of the 23 city guesses
+                _, predicted_class = torch.max(predictions, 1) 
+                total_images += labels.size(0)
+                correct_guesses += (predicted_class == labels).sum().item()
+
+        avg_val_loss = val_loss / len(val_loader)
+        val_accuracy = (correct_guesses / total_images) * 100
+
+        print(f"--- End of Epoch {epoch+1} ---")
+        print(f"Train Loss: {avg_loss:.4f} | Val Loss: {avg_val_loss:.4f} | Val Accuracy: {val_accuracy:.2f}%")
+
+        ### SAVING MODEL if its the best found so far
+        if val_accuracy > best_val_accuracy:
+            print(f"higher accuracy found saving model... ({best_val_accuracy:.2f}% -> {val_accuracy:.2f}%)")
+            best_val_accuracy = val_accuracy
+            
+            # This line permanently saves the mathematical weights to a file in your project folder
+            torch.save(model.state_dict(), "best_city_guesser.pth")
+
+
+
 
 if __name__ == "__main__":
     train_model()
