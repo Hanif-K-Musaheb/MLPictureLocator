@@ -65,4 +65,5 @@ if __name__ == "__main__":
     # 4. Print the mathematical shape (the dimensions of the data block) to prove it worked
     print(f"Input batch shape: {dummy_batch.shape}")
     print(f"Output guesses shape: {final_guesses.shape}")
+
     print(f"Raw estimates for Image 1:\n{final_guesses[0]}")
