@@ -3,11 +3,8 @@
 #### [GSV database](https://www.kaggle.com/datasets/amaralibey/gsv-cities)
 ------
 
-### to start training data:
->do once
- 1. run image resize
- 2. run make splits
- 3. run data pipe
- 4. run model to install resnet
-> need to add save function but should only be done once unless there are changes made to the train
- 6. run train 
+### testing is now the next step and making the presentation:
+ - run `test_accuracy.py` to use the test data
+ - run `predict.py` to check if it can predict a random image
+ - we also need to the presentation and show the results below is an image of training
+ - <img width="513" height="624" alt="image" src="https://github.com/user-attachments/assets/9e1224bc-d584-4c4a-a695-7df25fdcd33e" />
