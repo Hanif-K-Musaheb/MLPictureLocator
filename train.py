@@ -11,22 +11,22 @@ import math
 import time
 
 def train_model():
-    # 1. Setup the Hardware
-    # This checks if your Mac has Apple Silicon (M1/M2/M3 chips) to speed up the math using MPS (Metal Performance Shaders, Apple's built-in system for accelerating graphics and AI math). If not, it uses the standard CPU (Central Processing Unit, the main general-purpose brain of your computer).
+
+    # this will check for my device(hanif) if it has MPS which i found online will speed up training time for me.
+    #TLDR dont need to change this since i pushed the NN to the repo bu tif you changing on non apple device change to CPU
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     print(f"Training using device: {device}")
 
-    # 2. Get the Data
-    print("Loading data trucks...")
+    #this will get the data that we all split in make_splits.py and put in ot batchs of 32 images which is industry standard
+    print("Loading data batchs...")
     train_loader, val_loader, test_loader = get_data_loaders(batch_size=32)
 
-    # 3. Instantiate (create a usable, physical copy of a programming blueprint) the Model
+    #this will instantiate a model of the brain so that it can then moved to the device outlined above which make it faster to model
     print("Building the AI brain...")
-    # We move the model directly to the 'device' so the fast hardware can process it
     model = CityGuesserTransfer(num_cities=c.NUM_CITIES).to(device)
 
-    # 4. Set the Rules for Learning
-    # The Loss Function (a mathematical formula that calculates exactly how wrong the AI's guesses are compared to the actual correct answers)
+    #applies softmax to the output of the neural net so that all the answers are between 0 and 1 
+    #it will also calculate the loss: loss = -log(probability its correct) essentially measuring how confident it was
     criterion = nn.CrossEntropyLoss()
     
     # The Optimizer (an algorithm that goes inside the AI's brain and slightly adjusts its internal mathematical dials to make it guess better next time)
