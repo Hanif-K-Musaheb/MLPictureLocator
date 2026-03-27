@@ -66,9 +66,16 @@ def run_final_exam():
                 if true_label == guessed_label:
                     class_correct[city_name] += 1
 
+
+    # to convert non-obvious names
+    city_name_convert_dict={"OSL":"Oslo",
+                            "PRG":"Prague",
+                            "PRS":"Paris",
+                            "TRT":"Toronto"}
+
     # 5. Calculate and Print the Final Report Card
     print("\n" + "="*40)
-    print("🎓 FINAL EXAM REPORT CARD 🎓")
+    print("TESTING RESULTS")
     print("="*40)
     
     overall_accuracy = (overall_correct / overall_total) * 100
@@ -76,11 +83,16 @@ def run_final_exam():
     
     print("--- Accuracy Breakdown by City ---")
     for city in city_names:
+        if city in ["OSL", "PRG", "PRS", "TRT"]:
+            city_print_name=city_name_convert_dict[city]
+        else:
+            city_print_name=city
+        
         if class_total[city] > 0:
             city_acc = (class_correct[city] / class_total[city]) * 100
-            print(f"{city.ljust(15)}: {city_acc:>6.2f}%  ({class_correct[city]}/{class_total[city]})")
+            print(f"{city_print_name.ljust(15)}: {city_acc:>6.2f}%  ({class_correct[city]}/{class_total[city]})")
         else:
-            print(f"{city.ljust(15)}: No test images found!")
+            print(f"{city_print_name.ljust(15)}: No test images found!")
     print("="*40)
 
 if __name__ == "__main__":

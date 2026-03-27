@@ -17,8 +17,8 @@ def predict_city(image_path):
     model = CityGuesserTransfer(num_cities=c.NUM_CITIES).to(device)
     model.load_state_dict(torch.load("best_city_guesser.pth", map_location=device))
     
-    # Lock the dials! This prevents the AI from trying to learn from the test image.
-    model.eval()
+    
+    model.eval()# Lock the dials! This prevents the AI from trying to learn from the test image.
 
     # 3. Prepare the New Image
     # We MUST use the exact same transformations we used during training, including the exact ResNet normalization [a mathematical process that shifts and scales data to match a standardized baseline].
