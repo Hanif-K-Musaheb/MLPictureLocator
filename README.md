@@ -1,4 +1,5 @@
 # Machine Learning Picture Locator
+#### [final report google doc](https://docs.google.com/document/d/1Ybi8SnrEOBurphHlHvJ0PCxsJztGaBQyI9zmo5elKVA/edit?usp=sharing)
 #### [Project short proposal](https://docs.google.com/document/d/1KCMH6d2X6r1-BFHSYg7oauPKJSveUPxbLv-iIyglzGM/edit?tab=t.0)
 #### [GSV database](https://www.kaggle.com/datasets/amaralibey/gsv-cities)
 ------
