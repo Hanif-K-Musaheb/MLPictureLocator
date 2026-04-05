@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 
-# 1. Set your folders
+# 1. Set the folders
 # The folder where your original city folders are currently located
 input_folder = "archive/Images" 
 # The new folder where the script will save the smaller versions
@@ -33,7 +33,11 @@ for city_name in os.listdir(input_folder):
             if file_name.lower().endswith(('.png', '.jpg', '.jpeg')):
                 img_path = os.path.join(city_path, file_name)
                 out_img_path = os.path.join(out_city_path, file_name)
-                
+
+                # Skip if already resized and saved
+                if os.path.exists(out_img_path):
+                    continue
+
                 # 5. Open, resize, and save the image using a try-except block [a way to write code that anticipates and manages errors so the program doesn't crash]
                 try:
                     with Image.open(img_path) as img:
