@@ -1,7 +1,7 @@
 import os
 from dataPrep import split_data
 
-CITY_FOLDER = "archive/images/Boston"  # CHANGE to a real path on your machine
+CITY_FOLDER = "images/Boston"  # CHANGE to a real path on your machine
 
 def test_folder_exists():
     assert os.path.isdir(CITY_FOLDER), f"Folder not found: {CITY_FOLDER}"

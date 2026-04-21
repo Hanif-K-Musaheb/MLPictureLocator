@@ -5,7 +5,14 @@ import constants as c
 
 def run_final_exam():
     # 1. Setup the Hardware
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+
+    elif torch.cuda.is_available():
+        device = torch.device("cuda")
+
+    else:
+        device = torch.device("cpu")
     print(f"Loading grading system on: {device}")
 
     # 2. Get the Test Data
@@ -15,7 +22,7 @@ def run_final_exam():
     # 3. Load the Saved AI Brain
     print("Loading your trained AI...")
     model = CityGuesserTransfer(num_cities=c.NUM_CITIES).to(device)
-    model.load_state_dict(torch.load("best_city_guesser.pth", map_location=device))
+    model.load_state_dict(torch.load("best_city_guesser_15_epochs.pth", map_location=device))
     
     # model.eval() turns OFF learning mode so it just takes the test without cheating
     model.eval()

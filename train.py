@@ -11,10 +11,23 @@ import math
 import time
 
 def train_model():
+    print("torch version:", torch.__version__)
+    print("torch.version.cuda:", torch.version.cuda)
+    print("cuda available:", torch.cuda.is_available())
+    print("cuda device count:", torch.cuda.device_count())
+    if torch.cuda.is_available():
+        print("gpu name:", torch.cuda.get_device_name(0))
 
     # this will check for my device(hanif) if it has MPS which i found online will speed up training time for me.
     #TLDR dont need to change this since i pushed the NN to the repo bu tif you changing on non apple device change to CPU
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+
+    elif torch.cuda.is_available():
+        device = torch.device("cuda")
+
+    else:
+        device = torch.device("cpu")
     print(f"Training using device: {device}")
 
     #this will get the data that we all split in make_splits.py and put in ot batchs of 32 images which is industry standard
@@ -114,7 +127,7 @@ def train_model():
             best_val_accuracy = val_accuracy
             
             # This line permanently saves the mathematical weights to a file in your project folder
-            torch.save(model.state_dict(), "best_city_guesser.pth")
+            torch.save(model.state_dict(), "best_city_guesser_15_epochs.pth")
 
 
 
