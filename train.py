@@ -14,7 +14,14 @@ def train_model():
 
     # this will check for my device(hanif) if it has MPS which i found online will speed up training time for me.
     #TLDR dont need to change this since i pushed the NN to the repo bu tif you changing on non apple device change to CPU
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+
+    elif torch.cuda.is_available():
+        device = torch.device("cuda")
+
+    else:
+        device = torch.device("cpu")
     print(f"Training using device: {device}")
 
     #this will get the data that we all split in make_splits.py and put in ot batchs of 32 images which is industry standard

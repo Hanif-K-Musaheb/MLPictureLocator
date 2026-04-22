@@ -9,7 +9,14 @@ import constants as c
 
 def predict_city(image_path):
     # 1. Setup the Hardware
-    device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+
+    elif torch.cuda.is_available():
+        device = torch.device("cuda")
+
+    else:
+        device = torch.device("cpu")
     print(f"Loading AI on device: {device}...")
 
     # 2. Build the Empty Brain and Inject the Memories
@@ -65,5 +72,5 @@ def predict_city(image_path):
 
 if __name__ == "__main__":
     # Put the path to any random image you download from the internet here!
-    test_image = "test_photo.jpg" 
+    test_image = "bangkok_city.jpg"
     predict_city(test_image)
