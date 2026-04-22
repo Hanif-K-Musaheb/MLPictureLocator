@@ -34,7 +34,13 @@ def train_model():
 
     #applies softmax to the output of the neural net so that all the answers are between 0 and 1 
     #it will also calculate the loss: loss = -log(probability its correct) essentially measuring how confident it was
-    criterion = nn.CrossEntropyLoss()
+    class_counts = [counts[i] for i in range(len(train_loader.dataset.classes))]
+
+    weights = [sum(class_counts) / (len(class_counts) * count) for count in class_counts]
+
+    class_weights = torch.tensor(weights, dtype=torch.float32).to(device)
+
+    criterion = nn.CrossEntropyLoss(weight=class_weights)
     
     # The Optimizer (an algorithm that goes inside the AI's brain and slightly adjusts its internal mathematical dials to make it guess better next time)
     # lr is the learning rate (a tiny decimal number that tells the optimizer how big of a step to take when adjusting the AI's dials)
