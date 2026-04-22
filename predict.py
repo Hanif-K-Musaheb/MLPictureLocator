@@ -52,7 +52,7 @@ def predict_city(image_path):
         percentages = F.softmax(raw_scores, dim=1)[0] * 100
         
         # Find the single highest percentage and its index 
-        winning_percentage, winning_index = torch.max(percentages, 0)
+        sorted_percentages, sorted_indices = torch.sort(percentages, descending=True)
 
     # 5. Print the Results
     # You will need to replace this list with your actual 23 cities in alphabetical order!
@@ -63,15 +63,21 @@ def predict_city(image_path):
     "Osaka", "OSL", "Phoenix", "PRG", "PRS", 
     "Rome", "TRT", "WashingtonDC"       
     ]
-    
-    guessed_city = city_names[winning_index.item()]
-    
+
     print("-" * 30)
-    print(f"Prediction: {guessed_city}")
-    print(f"Confidence: {winning_percentage.item():.2f}%")
+    print("Top Predictions:")
+
+    # Show top 5 guesses (you can change this number)
+    top_k = 5
+
+    for i in range(top_k):
+        city = city_names[sorted_indices[i].item()]
+        confidence = sorted_percentages[i].item()
+        print(f"{i + 1}. {city}: {confidence:.2f}%")
+
     print("-" * 30)
 
 if __name__ == "__main__":
     # Put the path to any random image you download from the internet here!
-    test_image = "madrid.jpg"
+    test_image = "miami_train.jpg"
     predict_city(test_image)
