@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from collections import Counter
 
 # Import the tools you built in your other files!
 from dataPipe import get_data_loaders
@@ -27,6 +28,12 @@ def train_model():
     #this will get the data that we all split in make_splits.py and put in ot batchs of 32 images which is industry standard
     print("Loading data batchs...")
     train_loader, val_loader, test_loader = get_data_loaders(batch_size=32)
+
+    counts = Counter(train_loader.dataset.targets)
+
+    print("Class counts:")
+    for i, city in enumerate(train_loader.dataset.classes):
+        print(city, counts[i])
 
     #this will instantiate a model of the brain so that it can then moved to the device outlined above which make it faster to model
     print("Building the AI brain...")
