@@ -43,9 +43,18 @@ def run_final_exam():
         for images, labels in test_loader:
             images, labels = images.to(device), labels.to(device)
             
-            # Make guesses for the batch
-            predictions = model(images)
-            _, predicted_classes = torch.max(predictions, 1)
+            #predictions = model(images)
+            #_, predicted_classes = torch.max(predictions, 1)
+
+            predictions_original = model(images)
+            flipped_images = torch.flip(images, dims=[3])
+            predictions_flipped = model(flipped_images)
+
+            probs_original = F.softmax(predictions_original, dim=1)
+            probs_flipped = F.softmax(predictions_flipped, dim=1)
+
+            avg_probs = (probs_original + probs_flipped) / 2
+            predicted_classes = torch.argmax(avg_probs, dim=1)
             
             # Tally the overall score
             overall_total += labels.size(0)
