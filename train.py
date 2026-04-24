@@ -127,7 +127,7 @@ def train_model():
             best_val_accuracy = val_accuracy
             
             # This line permanently saves the mathematical weights to a file in your project folder
-            torch.save(model.state_dict(), "best_city_guesser_15_epochs.pth")
+            torch.save(model.state_dict(), "best_city_guesser.pth")
 
 
 

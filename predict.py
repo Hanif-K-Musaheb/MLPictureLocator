@@ -54,8 +54,7 @@ def predict_city(image_path):
         # Find the single highest percentage and its index 
         sorted_percentages, sorted_indices = torch.sort(percentages, descending=True)
 
-    # 5. Print the Results
-    # You will need to replace this list with your actual 23 cities in alphabetical order!
+    # 5. print results
     city_names = [
     "Bangkok", "Barcelona", "Boston", "Brussels", "BuenosAires", 
     "Chicago", "Lisbon", "London", "LosAngeles", "Madrid", 
@@ -67,7 +66,7 @@ def predict_city(image_path):
     print("-" * 30)
     print("Top Predictions:")
 
-    # Show top 5 guesses (you can change this number)
+    # Show top 5 guesses
     top_k = 5
 
     for i in range(top_k):
@@ -78,6 +77,5 @@ def predict_city(image_path):
     print("-" * 30)
 
 if __name__ == "__main__":
-    # Put the path to any random image you download from the internet here!
-    test_image = "miami_train.jpg"
+    test_image = "pa.webp"
     predict_city(test_image)

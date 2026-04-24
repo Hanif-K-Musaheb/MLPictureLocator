@@ -22,7 +22,7 @@ def run_final_exam():
     # 3. Load the Saved AI Brain
     print("Loading your trained AI...")
     model = CityGuesserTransfer(num_cities=c.NUM_CITIES).to(device)
-    model.load_state_dict(torch.load("best_city_guesser_15_epochs.pth", map_location=device))
+    model.load_state_dict(torch.load("best_city_guesser.pth", map_location=device))
     
     # model.eval() turns OFF learning mode so it just takes the test without cheating
     model.eval()
